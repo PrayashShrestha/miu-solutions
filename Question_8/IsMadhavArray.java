@@ -29,48 +29,39 @@ package Question_8;
         -----------------------------------|-------|---------------------------------------------------
  */
 public class IsMadhavArray {
-    static int isMadhavArray(int[] arr) {
-
-        int arrLen = arr.length;
-        int sum_of_n = 0;
-
-        if (arr.length < 3)
-            return 0;
-
-        // test for natural number sum length of the array
-        for (int i = 0; i < arrLen; i++) {
-            sum_of_n = i * (i + 1) / 2;
-
-            if (sum_of_n == arrLen) {
-                break;
+    static int isMadhavArray(int[] array) {
+        if (array.length == 0) return 0;
+        int n = 1;
+        int expectedSum = n*(n+1)/2 * array[0];
+        int start = 0;
+        while (start < array.length) {
+            int currentSum = 0;
+            int end = start + n;
+            if(end > array.length) return 0;
+            for(int i = start; i < end; i++) {
+                currentSum += array[i];
             }
-
-            else if (sum_of_n > arrLen)
-                return 0;
-        }
-
-        int startIndex = 1, count = 1, firstvalue = arr[0], endIndex = startIndex + count;
-
-        while (startIndex < arrLen) {
-            int tempSum = 0;
-
-            for (int i = startIndex; i <= endIndex; i++) {
-                tempSum = tempSum + arr[i];
-            }
-
-            if (tempSum != firstvalue)
-                return 0;
-
-            count++;
-            startIndex = endIndex + 1;
-            endIndex = startIndex + count;
-
+            if(currentSum != expectedSum) return 0;
+            n++;
+            start = end;
         }
         return 1;
     }
 
     public static void main(String args[]) {
-        int[] arr = { 2, 1, 1, 4, -1, -1 };
-        System.out.println(isMadhavArray(arr));
+        int result = isMadhavArray(new int[]{2, 1, 1});
+        System.out.println(result);
+         result = isMadhavArray(new int[]{2, 1, 1, 4, -1, -1});
+         System.out.println(result);
+         result = isMadhavArray(new int[]{6, 2, 4, 2, 2, 2, 1, 5, 0, 0});
+         System.out.println(result);
+         result = isMadhavArray(new int[]{18, 9, 10, 6, 6, 6});
+         System.out.println(result);
+         result = isMadhavArray(new int[]{-6, -3, -3, 8, -5, -4});
+         System.out.println(result);
+         result = isMadhavArray(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, -2, -1});
+         System.out.println(result);
+         result = isMadhavArray(new int[]{3, 1, 2, 3, 0});
+         System.out.println(result);
     }
 }

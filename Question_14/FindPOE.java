@@ -29,29 +29,22 @@ Examples
 */
 public class FindPOE {
     static int poe(int[] arr){
-        if(arr.length < 3) return -1;
-
-        int i = 0;
-        int j = arr.length - 1;
-        int idx = 1;
-
-        int leftSum = arr[i];
-        int rightSum = arr[j];
-        for (int k = 1; k < arr.length - 2; k++ ){
-            if (leftSum < rightSum) {
-                i++;
-                leftSum += arr[i];
-                idx = i + 1;
-            } else {
-                j--;
-                rightSum += arr[j];
-                idx = j - 1;
+        int arrayLen = arr.length;
+        for(int index = 0; index < arrayLen; index++ ){
+            int leftSum = 0;
+            int rightSum = 0;
+            for(int l = 0; l < index; l++){
+                leftSum += arr[l];
+            }
+            for(int r = index + 1; r < arrayLen; r++){
+                rightSum += arr[r];
+            }
+            
+            if(leftSum == rightSum){
+                return index;
             }
         }
-        if (leftSum == rightSum)
-            return idx;
-        else
-            return -1;
+        return -1;
     }
     public static void main(String[] args) {
         System.out.println(poe(new int[]{1,2,3,4,5}));

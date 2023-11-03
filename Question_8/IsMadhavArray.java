@@ -30,20 +30,31 @@ package Question_8;
  */
 public class IsMadhavArray {
     static int isMadhavArray(int[] array) {
-        if (array.length == 0) return 0;
-        int n = 1;
-        int expectedSum = n*(n+1)/2 * array[0];
-        int start = 0;
-        while (start < array.length) {
-            int currentSum = 0;
-            int end = start + n;
-            if(end > array.length) return 0;
-            for(int i = start; i < end; i++) {
-                currentSum += array[i];
+        int arrLen = a.length;
+        if (arrLen == 0) return 0;
+        int firstItem = a[0];
+        
+        int counter = 1;
+        int index = 1;
+        
+        while(index < arrLen){
+            int sum = 0;
+            int limit = index + counter;
+            
+            if(limit >= arrLen){
+                return 0;
             }
-            if(currentSum != expectedSum) return 0;
-            n++;
-            start = end;
+            
+            for(int i = index; i<=limit; i++){
+                sum += a[i];
+            }
+            
+            if(sum != firstItem){
+                return 0;
+            }
+            index = limit + 1;
+            counter ++;
+
         }
         return 1;
     }
